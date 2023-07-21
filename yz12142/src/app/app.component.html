@@ -1,0 +1,20 @@
+<!-- add row with classname rows,has two columns, the first col's width 30%, the second col's width 70% -->
+<div class="container">
+  <!-- add a switch case to check if metaData.section exits create a row element-->
+  <div class="row" *ngFor="let each of metaData">
+    <div class="col-3">
+      <label>{{each?.section}}</label>
+    </div>
+    <div class="col-5">
+      <app-dynamic-render [components]="each.components" (componentsChange)="checkSubmitEnabled()"></app-dynamic-render>
+    </div>
+  </div>
+
+  <!-- add a footer button called submit -->
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-5" style="text-align: end;">
+      <button type="button" class="btn btn-primary" (click)="submit()" [disabled]="isDisabled">Submit</button>
+    </div>
+  </div>
+</div>

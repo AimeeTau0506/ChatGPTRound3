@@ -1,0 +1,45 @@
+<!-- add a for loop to read components -->
+<div *ngFor="let component of components">
+    <!-- add a ngSwitch param.type -->
+    <div [ngSwitch]="component.type">
+        <!-- if type is select, render a select element with label element -->
+        <div *ngSwitchCase="'select'" class="render-component" [id]="component?.key">
+            <label>{{component.label}}</label>
+            <select class="form-control" [required]="component?.rule?.required">
+                <option *ngFor="let option of component.options">{{option}}</option>
+            </select>
+        </div>
+        <!-- if type is textarea, render a textarea element with label element -->
+        <div *ngSwitchCase="'textarea'" class="render-component">
+            <label>{{component.label}}</label>
+            <textarea class="form-control" rows="3" [required]="component?.rule?.required"
+                (change)="setValue($event, component)"></textarea>
+        </div>
+        <!-- if type is button, render a button with label element -->
+        <div *ngSwitchCase="'button'" class="render-component">
+            <label>{{component.label}}</label>
+            <button type="button" class="btn btn-primary">{{component.label}}</button>
+        </div>
+        <!-- if type is input, render a input element with label element -->
+        <div *ngSwitchCase="'input'" class="render-component">
+            <label>{{component.label}}</label>
+            <input type="text" class="form-control" placeholder="{{component?.placeholder}}"
+                [required]="component?.rule?.required" (change)="setValue($event, component)">
+        </div>
+        <!-- if type is textbox, render a text element with label element -->
+        <div *ngSwitchCase="'textbox'" class="render-component">
+            <label>{{component.label}}</label>
+            <input type="text" class="form-control" placeholder="{{component?.placeholder}}"
+                [required]="component?.rule?.required" (change)="setValue($event, component)">
+        </div>
+        <!-- if type is radio, render a radio selection list with label element -->
+        <div *ngSwitchCase="'radio'" class="render-component">
+            <label>{{component.label}}</label>
+            <div *ngFor="let option of component.options">
+                <input type="radio" name="radio" value="{{option.value}}"
+                    (click)="setValue($event, component)">{{option.label}}
+            </div>
+        </div>
+    </div>
+
+</div>
